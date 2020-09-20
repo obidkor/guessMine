@@ -26,7 +26,7 @@ const handleListiening = () =>
 // server 구동(listen)
 const server = app.listen(PORT, handleListiening);
 
-// socket variable(아키텍처 : express 위에 socketio)
+// socket server variable(아키텍처 : express 위에 socketio)
 const io = socketIO.listen(server);
 
 //on : 이벤트 리슨
@@ -35,7 +35,17 @@ const io = socketIO.listen(server);
 //   name 이벤트 방출
 io.on("connection", (socket) => {
   //setTimeout(() => socket.broadcast.emit("hello"), 5000);
-  socket.on("helloGuys", () => console.log("the client said hello"));
+  socket.on("newMessage", ({ message }) => {
+    // client에서 emit로 메시지 받음
+    socket.broadcast.emit("messageNotif", {
+      message,
+      nickname: socket.nickname || "Anonymous",
+    }); //server가 받은거 broadcast
+  });
+  // socket object 안에 nickname을 첨부해 넘김
+  socket.on("setNickname", ({ nickname }) => {
+    socket.nickname = nickname;
+  });
 });
 
 //setInterval(() => console.log(sockets), 1000);
