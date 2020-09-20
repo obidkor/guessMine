@@ -29,9 +29,13 @@ const server = app.listen(PORT, handleListiening);
 // socket variable(아키텍처 : express 위에 socketio)
 const io = socketIO.listen(server);
 
-let sockets = [];
+//on : 이벤트 리슨
+// socket.emit("name") => 해당 연결된 세션에만 name이벤트 방출
+// socket.boardcast.emit("name") => 해당 연결된 세션을 제외한 모든 세션에
+//   name 이벤트 방출
 io.on("connection", (socket) => {
-  sockets.push(socket.id);
+  //setTimeout(() => socket.broadcast.emit("hello"), 5000);
+  socket.on("helloGuys", () => console.log("the client said hello"));
 });
 
-setInterval(() => console.log(sockets), 1000);
+//setInterval(() => console.log(sockets), 1000);
