@@ -13,6 +13,8 @@
     "eslint": "^7.9.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-csso": "^4.0.1",
     "gulp-sass": "^4.1.0",
     "morgan": "^1.10.0",
     "node-sass": "^4.14.1",
@@ -23,8 +25,14 @@
   },
   "scripts": {
     "dev:server": "nodemon --exec babel-node src/server.js",
-    "build:styles": "gulp styles"
+    "dev:assets": "gulp"
   },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not IE_Mob 11",
+    "maintained node versions"
+  ],
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
