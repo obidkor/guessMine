@@ -2,7 +2,8 @@ import { join } from "path"; // dir 모듈
 import express from "express"; // http 서버 모듈
 import socketIO from "socket.io"; // socket 통신 모듈
 import logger from "morgan";
-import socketController from "./socketController";
+import socketController from "./socketController"; //events function
+import events from "./events"; // global varable
 
 const PORT = 5000;
 //서버 variable
@@ -17,8 +18,10 @@ app.use(logger("dev"));
 // static
 app.use(express.static(join(__dirname, "static")));
 
-// view resolve
-app.get("/", (req, res) => res.render("home"));
+// view resolve, send pug the events
+app.get("/", (req, res) =>
+  res.render("home", { events: JSON.stringify(events) })
+);
 
 // launch message
 const handleListiening = () =>
