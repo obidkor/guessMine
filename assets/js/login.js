@@ -1,3 +1,5 @@
+const { initSockets } = require("./sockets");
+
 const body = document.querySelector("body");
 const loginForm = document.getElementById("jsLogin");
 
@@ -10,8 +12,9 @@ const nickname = localStorage.getItem(NICKNAME);
 const logIn = (nickname) => {
   // globalize socket variable(window.socket)
   // eslint-disable-next-line no-undef
-  window.socket = io("/");
-  window.socket.emit(window.events.setNickname, { nickname });
+  const socket = io("/");
+  socket.emit(window.events.setNickname, { nickname });
+  initSockets(socket);
 };
 
 if (nickname === null) {
