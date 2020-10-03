@@ -9,6 +9,7 @@ const LOGGED_IN = "loggedIn";
 
 const nickname = localStorage.getItem(NICKNAME);
 
+//login시
 const logIn = (nickname) => {
   // globalize socket variable(window.socket)
   // eslint-disable-next-line no-undef
@@ -17,6 +18,7 @@ const logIn = (nickname) => {
   initSockets(socket);
 };
 
+// 로그인 체크
 if (nickname === null) {
   body.className = LOGGED_OUT;
 } else {
@@ -25,6 +27,7 @@ if (nickname === null) {
   logIn(nickname);
 }
 
+//로컬 저장소 저장
 const handleFormSubmit = (e) => {
   e.preventDefault();
   const input = loginForm.querySelector("input");
