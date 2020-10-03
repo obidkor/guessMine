@@ -1,6 +1,6 @@
 //socket 이벤트(프론트)
-import "./sockets";
 import "./login";
-import "./notifications";
+import "./sockets";
+import "./chat";
 
 console.log(window.socket);
